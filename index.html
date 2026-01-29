@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
-*{ box-sizing:border-box; }  /* ✅ 추가 */
+*{ box-sizing:border-box; }
 
 body{
   font-family:Arial, sans-serif;
@@ -19,14 +19,12 @@ body{
   gap:20px;
 }
 
-/* 레이아웃 컨테이너 */
 #captureArea{
   display:flex;
   gap:20px;
   align-items:flex-start;
 }
 
-/* 좌/우 패널 */
 #leftPanel,
 #rightPanel{
   display:flex;
@@ -34,12 +32,10 @@ body{
   align-items:stretch;
 }
 
-/* ✅ 추가 */
 #rightPanel{
   width:280px;
 }
 
-/* ⭐ 상단 제목 영역 */
 #plannerHeader{
   background:white;
   border:1px solid #ccc;
@@ -60,7 +56,6 @@ body{
   background:transparent;
 }
 
-/* 그리드 영역 */
 #grid{
   display:grid;
   grid-template-columns:90px repeat(12,20px);
@@ -71,15 +66,13 @@ body{
   touch-action: none;
 }
 
-/* 일정목록 패널 */
+/* 일정목록 */
 #side{
   width:100%;
   background:white;
   border:1px solid #ccc;
   border-radius:10px;
   padding:10px;
-  position: sticky;
-  top: 10px;
   height: auto;
   overflow: visible;
   margin-bottom:10px;
@@ -167,13 +160,12 @@ body{
   font-size:16px;
 }
 
-/* ✅ 색상 선택 input만 따로 조정 */
 #colorInput{
-  width: 60px;
-  height: 36px;
-  padding: 0;
-  border: none;
-  background: none;
+  width:60px;
+  height:36px;
+  padding:0;
+  border:none;
+  background:none;
 }
 
 #addFromSide{
@@ -200,45 +192,8 @@ body{
 }
 
 .drag-preview{background: rgba(63,140,255,0.3);}
-
-/* 📱 모바일 */
-@media (max-width: 768px){
-  body{
-    flex-direction: row;
-    padding:14px;
-  }
-
-  #captureArea{
-    transform: scale(0.80);
-    transform-origin: top left;
-    width: 125%;
-  }
-
-  #grid{
-    overflow:auto;
-  }
-
-  #side{
-    width: 360px;
-    flex-shrink: 0;
-    height: auto;
-  }
-
-  #captureBtn{
-    width:360px;
-  }
-
-  #plannerHeader{
-    padding:12px;
-  }
-
-  #plannerTitle{
-    font-size:16px;
-  }
-}
 </style>
 </head>
-
 
 <body>
 
@@ -283,7 +238,17 @@ body{
 </div>
 
 <script>
-/* ===== 제목 자동 생성 : 📆Drag Time yymmdd ===== */
+/* ===== 랜덤 색 함수 (추가된 부분) ===== */
+function getRandomColor(){
+  const colors = [
+    "#3f8cff","#ff7675","#55efc4","#ffeaa7",
+    "#a29bfe","#fd79a8","#fab1a0","#81ecec",
+    "#74b9ff","#00b894","#fdcb6e","#e17055"
+  ];
+  return colors[Math.floor(Math.random()*colors.length)];
+}
+
+/* ===== 제목 자동 생성 ===== */
 const plannerTitleInput = document.getElementById("plannerTitle");
 const today = new Date();
 const yy = String(today.getFullYear()).slice(2);
@@ -397,7 +362,7 @@ document.addEventListener("pointerup", ()=>{
 
   titleInput.value="";
   detailInput.value="";
-  colorInput.value="#3f8cff";
+  colorInput.value = getRandomColor();   // ✅ 랜덤색
 
   editStart.value=times[s];
   editEnd.value=times[e] || times[times.length-1];
@@ -523,7 +488,7 @@ addFromSideBtn.onclick=()=>{
   modalTitle.innerText="일정 추가";
   titleInput.value="";
   detailInput.value="";
-  colorInput.value="#3f8cff";
+  colorInput.value = getRandomColor();   // ✅ 랜덤색
   editStart.value=times[0];
   editEnd.value=times[1];
   modal.style.display="flex";
@@ -571,5 +536,3 @@ document.getElementById("captureBtn").onclick = ()=>{
 </script>
 </body>
 </html>
-
-
