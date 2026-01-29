@@ -271,7 +271,7 @@ const STORAGE_KEY = "dragtime_data_v1";
 
 /* ===== 전체 초기화 ===== */
 function resetAll(){
-  if(confirm("⚠ 모든 일정, 제목, 색상, 저장데이터가 삭제됩니다.\n완전히 초기화할까요?")){
+  if(confirm("⚠ 모든 데이터가 삭제됩니다.\n완전히 초기화할까요?")){
     localStorage.removeItem(STORAGE_KEY);
     location.reload();
   }
@@ -293,7 +293,7 @@ const today = new Date();
 const yy = String(today.getFullYear()).slice(2);
 const mm = String(today.getMonth()+1).padStart(2,"0");
 const dd = String(today.getDate()).padStart(2,"0");
-plannerTitleInput.value = `📆Drag Time ${yy}${mm}${dd}`;
+plannerTitleInput.value = `📆 Drag Time ${yy}${mm}${dd}`;
 plannerTitleInput.addEventListener("input", saveAll);
 
 /* ===== 요소 ===== */
@@ -625,4 +625,5 @@ loadAll();
 </script>
 </body>
 </html>
+
 
