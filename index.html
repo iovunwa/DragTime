@@ -19,6 +19,18 @@ body{
   gap:20px;
 }
 
+/* ✅ 모바일 오른쪽 여백 보정 */
+@media (max-width: 768px){
+  body{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  #captureArea{
+    padding-right:20px;
+  }
+}
+
 #captureArea{
   display:flex;
   gap:20px;
@@ -613,3 +625,4 @@ loadAll();
 </script>
 </body>
 </html>
+
