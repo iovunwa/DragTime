@@ -38,14 +38,22 @@ body{
 #captureArea{
   display:flex;
   gap:20px;
-  align-items:flex-start;
+  align-items:flex-start;   /* ✅ 상단 기준 정렬 */
+}
+
+/* 좌/우 패널 */
+#leftPanel,
+#rightPanel{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
 }
 
 /* ⭐ 상단 제목 영역 */
 #plannerHeader{
   background:white;
   border:1px solid #ccc;
-  border-radius:10px;   /* ✅ 통일 */
+  border-radius:10px;
   padding:14px 16px;
   margin-bottom:12px;
   box-shadow:0 4px 10px rgba(0,0,0,0.03);
@@ -68,7 +76,7 @@ body{
   grid-template-columns:90px repeat(12,20px);
   border:1px solid #ccc;
   background:white;
-  border-radius:10px;   /* 기준 */
+  border-radius:10px;
   overflow:hidden;
   touch-action: none;
 }
@@ -78,7 +86,7 @@ body{
   width:280px;
   background:white;
   border:1px solid #ccc;
-  border-radius:10px;   /* ✅ 통일 */
+  border-radius:10px;
   padding:10px;
   position: sticky;
   top: 10px;
@@ -88,6 +96,7 @@ body{
 
 #side h3{text-align:center;}
 
+/* ===== 이하 스타일 동일 ===== */
 .side-item{
   display:flex;
   align-items:flex-start;
@@ -185,7 +194,7 @@ body{
 @media (max-width: 768px){
   body{
     flex-direction: row;
-    padding:6px;
+    padding:14px;   /* ✅ 여백 증가 */
   }
 
   #captureArea{
@@ -227,19 +236,24 @@ body{
 </div>
 
 <div id="captureArea">
-  <div>
+
+  <!-- 좌측 -->
+  <div id="leftPanel">
     <div id="plannerHeader">
       <input id="plannerTitle">
     </div>
-
     <div id="grid"></div>
   </div>
 
-  <div id="side">
-    <h3>📌 일정 목록</h3>
-    <button id="addFromSide">📋 일정 추가</button>
-    <div id="list"></div>
+  <!-- 우측 -->
+  <div id="rightPanel">
+    <div id="side">
+      <h3>📌 일정 목록</h3>
+      <button id="addFromSide">📋 일정 추가</button>
+      <div id="list"></div>
+    </div>
   </div>
+
 </div>
 
 <div class="modal" id="modal">
