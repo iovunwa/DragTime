@@ -61,8 +61,8 @@ body{
   padding:10px;
   overflow-y:auto;
   height: calc(100vh - 40px);
-  position: sticky;     /* ⭐ 고정 패널 */
-  top: 10px;             /* ⭐ 스크롤 고정 위치 */
+  position: sticky;
+  top: 10px;
 }
 
 #side h3{text-align:center;}
@@ -160,15 +160,15 @@ body{
 
 .drag-preview{background: rgba(63,140,255,0.3);}
 
-/* 📱 모바일 = 구조 유지 + 전체 축소 */
+/* 📱 모바일 = 구조 유지 + 전체 축소 + 일정목록 가로 확장 */
 @media (max-width: 768px){
   body{
-    flex-direction: row;   /* ⭐ PC 구조 유지 */
+    flex-direction: row;
     padding:6px;
   }
 
   #captureArea{
-    transform: scale(0.80);      /* ⭐ 전체 축소 */
+    transform: scale(0.80);
     transform-origin: top left;
     width: 125%;
   }
@@ -179,6 +179,8 @@ body{
 
   #side{
     height: calc(100vh - 20px);
+    width: 360px;     /* ⭐ 일정목록 가로 확장 */
+    flex-shrink: 0;   /* ⭐ 축소 방지 */
   }
 
   #topBar{
