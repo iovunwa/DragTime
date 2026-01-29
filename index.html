@@ -8,6 +8,8 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
+*{ box-sizing:border-box; }  /* ✅ 추가 */
+
 body{
   font-family:Arial, sans-serif;
   background:#f4f6fa;
@@ -17,28 +19,11 @@ body{
   gap:20px;
 }
 
-#topBar{
-  position:fixed;
-  top:10px;
-  right:10px;
-  z-index:2000;
-}
-
-#captureBtn{
-  padding:8px 14px;
-  border:none;
-  border-radius:8px;
-  background:#111;
-  color:white;
-  cursor:pointer;
-  font-size:13px;
-}
-
 /* 레이아웃 컨테이너 */
 #captureArea{
   display:flex;
   gap:20px;
-  align-items:flex-start;   /* ✅ 상단 기준 정렬 */
+  align-items:flex-start;
 }
 
 /* 좌/우 패널 */
@@ -47,6 +32,11 @@ body{
   display:flex;
   flex-direction:column;
   align-items:stretch;
+}
+
+/* ✅ 추가 */
+#rightPanel{
+  width:280px;
 }
 
 /* ⭐ 상단 제목 영역 */
@@ -83,7 +73,7 @@ body{
 
 /* 일정목록 패널 */
 #side{
-  width:280px;
+  width:100%;
   background:white;
   border:1px solid #ccc;
   border-radius:10px;
@@ -92,11 +82,11 @@ body{
   top: 10px;
   height: auto;
   overflow: visible;
+  margin-bottom:10px;
 }
 
 #side h3{text-align:center;}
 
-/* ===== 이하 스타일 동일 ===== */
 .side-item{
   display:flex;
   align-items:flex-start;
@@ -177,6 +167,15 @@ body{
   font-size:16px;
 }
 
+/* ✅ 색상 선택 input만 따로 조정 */
+#colorInput{
+  width: 60px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
 #addFromSide{
   width:100%;
   margin-bottom:10px;
@@ -188,13 +187,25 @@ body{
   cursor:pointer;
 }
 
+/* 📸 저장 버튼 */
+#captureBtn{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#111;
+  color:white;
+  cursor:pointer;
+  font-size:13px;
+}
+
 .drag-preview{background: rgba(63,140,255,0.3);}
 
 /* 📱 모바일 */
 @media (max-width: 768px){
   body{
     flex-direction: row;
-    padding:14px;   /* ✅ 여백 증가 */
+    padding:14px;
   }
 
   #captureArea{
@@ -213,6 +224,10 @@ body{
     height: auto;
   }
 
+  #captureBtn{
+    width:360px;
+  }
+
   #plannerHeader{
     padding:12px;
   }
@@ -220,20 +235,12 @@ body{
   #plannerTitle{
     font-size:16px;
   }
-
-  #topBar{
-    transform: scale(0.85);
-    transform-origin: top right;
-  }
 }
 </style>
 </head>
 
-<body>
 
-<div id="topBar">
-  <button id="captureBtn">📸 화면 저장</button>
-</div>
+<body>
 
 <div id="captureArea">
 
@@ -247,15 +254,21 @@ body{
 
   <!-- 우측 -->
   <div id="rightPanel">
+
     <div id="side">
       <h3>📌 일정 목록</h3>
       <button id="addFromSide">📋 일정 추가</button>
       <div id="list"></div>
     </div>
+
+    <!-- 📸 화면 저장 버튼 -->
+    <button id="captureBtn">📸 화면 저장</button>
+
   </div>
 
 </div>
 
+<!-- 모달 -->
 <div class="modal" id="modal">
   <div class="modal-box">
     <h3 id="modalTitle">일정 입력</h3>
@@ -526,6 +539,9 @@ document.getElementById("captureBtn").onclick = ()=>{
   const addBtn = document.getElementById("addFromSide");
   addBtn.style.display = "none";
 
+  const capBtn = document.getElementById("captureBtn");
+  capBtn.style.display = "none";
+
   const wrapper = document.createElement("div");
   wrapper.style.padding = "40px";
   wrapper.style.background = "#f4f6fa";
@@ -549,8 +565,11 @@ document.getElementById("captureBtn").onclick = ()=>{
 
     btns.forEach(b=>b.style.display="block");
     addBtn.style.display = "block";
+    capBtn.style.display = "block";
   });
 };
 </script>
 </body>
 </html>
+
+
